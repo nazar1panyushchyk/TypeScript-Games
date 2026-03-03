@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../css/style.css";
+import "../../css/style.css";
 
 export default function ChooseScientist() {
   type Scientists = {

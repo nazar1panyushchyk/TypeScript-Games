@@ -1,13 +1,22 @@
 import { RxCross1 } from "react-icons/rx";
 import "../../css/modal.css";
+import { useState } from "react";
 
 type ModalProps = {
   isOpen: boolean;
   onClose: (value: boolean) => void;
+  setSavedName: (name: string) => void;
 };
 
-export default function Modal({ isOpen, onClose }: ModalProps) {
+export default function Modal({ isOpen, onClose, setSavedName }: ModalProps) {
   if (!isOpen) return null;
+
+  const [nameInput, setNameInput] = useState("");
+
+  const handleSave = () => {
+    setSavedName(nameInput);
+    onClose(false);
+  }
 
   return (
     <>
@@ -31,8 +40,8 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
           </p>
           <p>Введіть своє ім'я:</p>
           <div className="field">
-            <input type="text" placeholder="Ваше ім'я" />
-            <button>Зберегти</button>
+            <input type="text" placeholder="Ваше ім'я" value={nameInput} onChange={(e) => setNameInput(e.target.value)}/>
+            <button type="submit" onClick={handleSave}>Зберегти</button>
           </div>
         </div>
       </div>
